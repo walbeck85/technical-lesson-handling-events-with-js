@@ -1,19 +1,50 @@
-// Select the dodger element for manipulation
-// Hint: Use document.getElementById to select the element with id "dodger"
+// Select the dodger element from the DOM and set initial position
+const dodger = document.getElementById("dodger");
+dodger.style.left = "180px";
+dodger.style.top = "0px";
 
-// Function to move the dodger left
-// Hint: Define a function moveDodgerLeft()
-// Hint: Convert the current left position from a string to an integer
-// Hint: Ensure the dodger doesn't move off-screen
-// Hint: Update the left position of the dodger
+// Move the dodger 10px to the left, unless at the left edge
+function moveDodgerLeft() {
+  const left = parseInt(dodger.style.left.replace("px", ""), 10);
+  if (left > 0) {
+    dodger.style.left = `${left - 10}px`;
+  }
+}
 
-// Function to move the dodger right
-// Hint: Define a function moveDodgerRight()
-// Hint: Convert the current left position from a string to an integer
-// Hint: Ensure the dodger doesn't move off-screen
-// Hint: Update the left position of the dodger
+// Move the dodger 10px to the right, stopping before reaching the edge (400px - dodger width)
+function moveDodgerRight() {
+  const left = parseInt(dodger.style.left.replace("px", ""), 10);
+  if (left < 360) {
+    dodger.style.left = `${left + 10}px`;
+  }
+}
 
-// Attach event listener to respond to key presses
-// Hint: Use document.addEventListener to listen for "keydown" events
-// Hint: Inside the event listener, call moveDodgerLeft if the left arrow key is pressed
-// Hint: Call moveDodgerRight if the right arrow key is pressed
+// Move the dodger 10px up, unless at the top edge
+function moveDodgerUp() {
+  const top = parseInt(dodger.style.top.replace("px", ""), 10);
+  if (top > 0) {
+    dodger.style.top = `${top - 10}px`;
+  }
+}
+
+// Move the dodger 10px down, stopping before reaching the bottom edge (400px - dodger height)
+function moveDodgerDown() {
+  const top = parseInt(dodger.style.top.replace("px", ""), 10);
+  if (top < 360) {
+    dodger.style.top = `${top + 10}px`;
+  }
+}
+
+// Listen for arrow key presses and call the appropriate movement function
+document.addEventListener("keydown", function (event) {
+  console.log("Key pressed:", event.key);
+  if (event.key === "ArrowLeft") {
+    moveDodgerLeft();
+  } else if (event.key === "ArrowRight") {
+    moveDodgerRight();
+  } else if (event.key === "ArrowUp") {
+    moveDodgerUp();
+  } else if (event.key === "ArrowDown") {
+    moveDodgerDown();
+  }
+});
